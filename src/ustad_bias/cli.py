@@ -32,7 +32,8 @@ Examples:
     check_group.add_argument('content', nargs='?', help='Text to check')
     check_group.add_argument('--file', help='File to check')
     check_parser.add_argument('--verbose', action='store_true', help='Detailed analysis')
-    check_parser.add_argument('--json', action='store_true', help='Output as JSON')
+    check_parser.add_argument('--json', action='store_true', help='Output as JSON (for machines)')
+    check_parser.add_argument('--yaml', action='store_true', help='Output as YAML (human-readable, default)')
     
     # Validate command
     validate_parser = subparsers.add_parser('validate', help='Validate against framework')
@@ -40,14 +41,16 @@ Examples:
                                 choices=['un_human_rights', 'hippocratic', 'gdpr', 'ai_ethics'],
                                 help='Framework to validate against')
     validate_parser.add_argument('content', help='Content to validate')
-    validate_parser.add_argument('--json', action='store_true', help='Output as JSON')
+    validate_parser.add_argument('--json', action='store_true', help='Output as JSON (for machines)')
+    validate_parser.add_argument('--yaml', action='store_true', help='Output as YAML (human-readable, default)')
     
     # Principles command
     principles_parser = subparsers.add_parser('principles', help='Show ethical principles')
     principles_parser.add_argument('--framework',
                                  choices=['un_human_rights', 'hippocratic', 'ai_ethics'],
                                  help='Specific framework')
-    principles_parser.add_argument('--json', action='store_true', help='Output as JSON')
+    principles_parser.add_argument('--json', action='store_true', help='Output as JSON (for machines)')
+    principles_parser.add_argument('--yaml', action='store_true', help='Output as YAML (human-readable, default)')
     
     args = parser.parse_args()
     
