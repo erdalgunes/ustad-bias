@@ -1,0 +1,87 @@
+[project]
+name = "ustad-bias"
+version = "0.1.0"
+description = "Ethical AI guardrails - UN compliance and bias detection for preventing harmful AI use"
+authors = [{name = "Erdal Günes", email = "erdal@ustad.dev"}]
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Hippocratic License 3.0"}
+keywords = ["ethics", "bias-detection", "UN-compliance", "human-rights", "AI-safety", "hippocratic-license"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "httpx>=0.25.0",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.3.0",  # For bias detection algorithms
+    "fairlearn>=0.9.0",     # Microsoft's fairness toolkit
+    "transformers>=4.30.0",  # For text bias detection
+    "rich>=13.0.0",         # Enhanced terminal output
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+    "black>=23.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/erdalgunes/ustad-bias"
+"Bug Tracker" = "https://github.com/erdalgunes/ustad-bias/issues"
+"UN Declaration" = "https://www.un.org/en/about-us/universal-declaration-of-human-rights"
+"Hippocratic License" = "https://firstdonoharm.dev/"
+
+[project.scripts]
+ustad-bias = "ustad_bias.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+# UV-specific configuration for fast, reliable Python package management
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "ethical-ai-toolkit>=0.1.0",  # If available
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "S",   # flake8-bandit (security)
+]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
